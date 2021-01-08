@@ -66,3 +66,9 @@ button:not(:disabled):active {
 button:focus {
   border-color: #666;
 }
+
+/* This prevents Firefox from displaying a red box shadow
+  around required inputs that have no value. */
+input:invalid {
+  box-shadow: none;
+}
