@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import Category from "./Category.svelte";
   import { getGuid, sortOnName } from "./util";
 
@@ -7,6 +8,7 @@
   let categoryName;
   let message = "";
   let show = "all";
+  const dispatch = createEventDispatcher();
 
   $: categoryArray = sortOnName(Object.values(categories));
 
@@ -23,6 +25,11 @@
     categories[id] = { id, name: categoryName, items: {} };
     categories = categories;
     categoryName = "";
+  }
+
+  function deleteCategory(category) {
+    delete categories[category.id];
+    categories = categories;
   }
 
   function clearAllChecks() {
@@ -116,7 +123,11 @@
   </header>
   <div class="categories">
     {#each categoryArray as category (category.id)}
-      <Category bind:category {categories} {show} />
+      <Category
+        bind:category
+        {categories}
+        {show}
+        on:delete={() => deleteCategory(category)} />
     {/each}
   </div>
 </section>
