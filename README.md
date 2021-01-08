@@ -10,3 +10,5 @@ My code as I work through Svelte and Sapper in Action published by Manning Publi
   - 2.2 Working outside the REPL
     - 2.2.4 YOUR FIRST NON-REPL APP &mdash; [/loan](loan)
   - 2.3 Bonus app &mdash; [/todo](todo)
+- 3 Creating components
+  - 3.13 Building the Travel Packing app &mdash; [/travel-packing](travel-packing)
