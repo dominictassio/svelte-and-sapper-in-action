@@ -97,7 +97,7 @@
     <form on:submit|preventDefault={addCategory}>
       <label> New Category <input bind:value={categoryName} /> </label>
       <button disabled={!categoryName}>Add Category</button>
-      <button class="logout-btn">Log Out</button>
+      <button class="logout-btn" on:click={() => dispatch('logout')}>Log Out</button>
     </form>
     <p>
       Suggested categories include Backpack, Clothes,
