@@ -33,11 +33,13 @@
     items[id] = { id, name: itemName, packed: false };
     category.items = items;
     itemName = "";
+    dispatch("persist");
   }
 
   function deleteItem(item) {
     delete category.items[item.id];
     category = category;
+    dispatch("persist");
   }
 
   function shouldShow(show, item) {
