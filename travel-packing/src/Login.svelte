@@ -1,8 +1,11 @@
 <script>
+  import { createEventDispatcher } from "svelte";
+
   let password = "";
   let username = "";
+  const dispatch = createEventDispatcher();
 
-  const login = () => alert("You pressed Login.");
+  const login = () => dispatch("login");
   const signup = () => alert("You pressed Sign Up.");
 </script>
 
