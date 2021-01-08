@@ -1,4 +1,5 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import Item from "./Item.svelte";
   import { getGuid, blurOnKey, sortOnName } from "./util";
 
@@ -10,6 +11,7 @@
   let itemName = "";
   let items = [];
   let message = "";
+  const dispatch = createEventDispatcher();
 
   $: items = Object.values(category.items);
   $: remaining = items.filter((item) => !item.packed).length;
@@ -31,6 +33,11 @@
     items[id] = { id, name: itemName, packed: false };
     category.items = items;
     itemName = "";
+  }
+
+  function deleteItem(item) {
+    delete category.items[item.id];
+    category = category;
   }
 
   function shouldShow(show, item) {
@@ -94,7 +101,7 @@
         on:keypress={blurOnKey} />
     {:else}<span on:click={() => (editing = true)}>{category.name}</span>{/if}
     <span class="status">{status}</span>
-    <button class="icon">&#x1F5D1;</button>
+    <button class="icon" on:click={() => dispatch('delete')}>&#x1F5D1;</button>
   </h3>
   <form on:submit|preventDefault={addItem}>
     <label> New Item <input bind:value={itemName} /> </label>
@@ -104,7 +111,7 @@
     {#each itemsToShow as item (item.id)}
       <!-- This bind causes the category object to update
         when the item packed value is toggled. -->
-      <Item bind:item />
+      <Item bind:item on:delete={() => deleteItem(item)} />
     {:else}
       <div><span>This category does not contain any items yet.</span></div>
     {/each}
