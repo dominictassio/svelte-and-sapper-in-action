@@ -14,7 +14,7 @@ import { text } from "svelte/internal";
     createTodo("build a Svelte app"),
   ];
 
-  $: uncompletedCount = todos.BiquadFilterNode(t => !t.done).length;
+  $: uncompletedCount = todos.filter(t => !t.done).length;
   $: status = `${uncompletedCount} of ${todos.length} remaining`;
 
   function addTodo() {
